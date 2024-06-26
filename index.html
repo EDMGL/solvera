@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLVERA LEAD</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: rgba(255, 0, 0, 0.9);
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .form-container h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .form-container input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .form-container label {
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .form-container button:hover {
+            background: #ddd;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://webtracking-v01.creatio.com/JS/track-cookies.js"></script>
+    <script src="https://webtracking-v01.creatio.com/JS/create-object.js"></script>
+    <script>
+        var config = {
+            fields: {
+                "Name": "#name", 
+                "Email": "#email",
+                "MobilePhone": "#phone",
+                "Company": "#company",
+                "Commentary": "#message"
+            },
+            contactFields: {
+                "FullName": "#name", 
+                "Phone": "#phone",
+                "Email": "#email"
+            },
+            customFields: {},
+            landingId: "bfdb8569-977d-41e9-a092-4dfd46df5ab5",
+            serviceUrl: "https://11002534-se-m-se-demo.creatio.com/0/ServiceModel/GeneratedObjectWebFormService.svc/SaveWebFormObjectData",
+            redirectUrl: ""
+        };
+
+        function createObject() {
+            console.log('Form submission started...');
+            try {
+                landing.createObjectFromLanding(config);
+                console.log('Form data:', {
+                    name: document.getElementById('name').value,
+                    company: document.getElementById('company').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    message: document.getElementById('message').value,
+                });
+                alert('Form successfully submitted!');
+                document.querySelector('.mainForm').reset();
+                console.log('Form submission completed.');
+            } catch (error) {
+                console.error('Form submission error:', error);
+            }
+        }
+
+        function initLanding() {
+            landing.initLanding(config);
+            console.log('Landing page initialized.');
+        }
+
+        jQuery(document).ready(initLanding);
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>SOLVERA LEAD</h1>
+        <form class="mainForm" name="landingForm" onsubmit="createObject(); return false;">
+            <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+            <input type="text" id="company" name="company" placeholder="Company" required>
+            <input type="email" id="email" name="email" placeholder="Enter Your E-mail" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+            <textarea id="message" name="message" placeholder="Message" rows="4" required></textarea>
+            <label>
+                <input type="checkbox" name="consent" required> I agree to receive commercial information from [Company Name] [*read more]
+            </label>
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</body>
+</html>
